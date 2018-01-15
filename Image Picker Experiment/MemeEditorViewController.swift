@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MemeEditorViewController.swift
 //  Image Picker Experiment
 //
 //  Created by Vineet Joshi on 1/11/18.
@@ -8,25 +8,24 @@
 
 import UIKit
 
-let DEFAULT_TEXT = ["TOP", "BOTTOM"]
+let TOP_TAG = 0
+let BOTTOM_TAG = 1
+let DEFAULT_TEXT = ["[TOP TEXT]", "[BOTTOM TEXT]"]
 let MEME_TEXT_ATTRIBUTES: [String : Any] = [
     NSAttributedStringKey.strokeColor.rawValue : UIColor.black,
     NSAttributedStringKey.foregroundColor.rawValue : UIColor.white,
     NSAttributedStringKey.font.rawValue : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-    NSAttributedStringKey.strokeWidth.rawValue : 4.0
+    NSAttributedStringKey.strokeWidth.rawValue : -4.0
 ]
 
-struct Meme {
-    let topText: String?
-    let bottomText: String?
-    let originalImage: UIImage?
-    let memedImage: UIImage?
-}
-
 // To be a delegate of the UIImagePickerController, this also needs to conform to the UINavigationControllerDelegate protocol
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+    
+    
     
     // MARK: Initialize outlets and class variables
+    
+    
     
     @IBOutlet weak var imagePickerView: UIImageView!
     @IBOutlet weak var topMemeField: UITextField!
@@ -47,30 +46,24 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     var bottomEditing = false
     
+    
+    
     // MARK: Overriden functions from UIViewController
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
-        //print(UIFont.fontNames(forFamilyName: "Helvetica Neue"))
         
         // if the current device does not have a camera, then disable the Camera button:
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         
         // a 'guard' statement is like 'if not let'!
         
-        topMemeField.tag = 0
-        topMemeField.text = DEFAULT_TEXT[topMemeField.tag]
-        topMemeField.defaultTextAttributes = MEME_TEXT_ATTRIBUTES
-        topMemeField.textAlignment = NSTextAlignment.center
-        topMemeField.delegate = self
-        
-        bottomMemeField.tag = 1
-        bottomMemeField.text = DEFAULT_TEXT[bottomMemeField.tag]
-        bottomMemeField.defaultTextAttributes = MEME_TEXT_ATTRIBUTES
-        bottomMemeField.textAlignment = NSTextAlignment.center
-        bottomMemeField.delegate = self
+        // sets up the text attributes of the meme Text Fields:
+        setupMemeField(topMemeField, with: TOP_TAG)
+        setupMemeField(bottomMemeField, with: BOTTOM_TAG)
         
         // disables the "Share" Button:
         shareButton.isEnabled = false
@@ -93,7 +86,25 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         return true
     }
     
+    
+    
+    // MARK: Function to setup the meme Text Fields:
+    
+    
+    
+    func setupMemeField(_ textField: UITextField, with tag: Int) {
+        textField.tag = tag
+        textField.text = DEFAULT_TEXT[tag]
+        textField.defaultTextAttributes = MEME_TEXT_ATTRIBUTES
+        textField.textAlignment = NSTextAlignment.center
+        textField.delegate = self
+    }
+    
+    
+    
     // MARK: Keyboard Notification functions
+    
+    
     
     func subscribeToKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
@@ -104,14 +115,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @objc func keyboardWillShow(_ notification: Notification) {
         if bottomEditing {
             // moves the View up by the height of the keyboard: (so the keyboard won't cover up the content!)
-            self.view.frame.origin.y -= self.getKeyboardHeight(notification)
+            self.view.frame.origin.y = self.getKeyboardHeight(notification) * -1
         }
     }
     
     @objc func keyboardWillHide(_ notification: Notification) {
         if bottomEditing {
             // moves the View up by the height of the keyboard: (so the keyboard won't cover up the content!)
-            self.view.frame.origin.y += self.getKeyboardHeight(notification)
+            self.view.frame.origin.y = 0
         }
     }
     
@@ -128,12 +139,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // '.UIKeyboardWillShow' is shortened version of 'Notification.Name.UIKeyboardWillShow'
     }
     
+    
+    
     // MARK: Picking an Image
+    
+    
     
     @IBAction func pickImage(_ sender: Any) {
         // launches a UIImagePickerController
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
+        // decides whether the camera or "Select Image" Button was pressed:
         if (sender as! UIBarButtonItem).tag == 0 {
             pickerController.sourceType = .camera
         } else {
@@ -158,7 +174,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func textFieldDidBeginEditing(_ textField: UITextField) {
         // sets the bottomEditing variable to true if the user begins editing the bottom TextField
         bottomEditing = (textField.tag == 1)
-        if (textField.tag == 0 && textField.text == "TOP") || (textField.tag == 1 && textField.text == "BOTTOM") {
+        if (textField.tag == TOP_TAG && textField.text == DEFAULT_TEXT[TOP_TAG]) || (textField.tag == BOTTOM_TAG && textField.text == DEFAULT_TEXT[BOTTOM_TAG]) {
             textField.text = ""
         }
     }
@@ -181,16 +197,23 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             textField.text = textField.text?.trimmingCharacters(in: .whitespaces)
         }
         // if user has selected an image and both meme fields are filled, then enable the "Share" Button
-        shareButton.isEnabled = (imagePickerView.image != nil && topMemeField.text != DEFAULT_TEXT[0] && bottomMemeField.text != DEFAULT_TEXT[1])
+        shareButton.isEnabled = (imagePickerView.image != nil && topMemeField.text != DEFAULT_TEXT[TOP_TAG] && bottomMemeField.text != DEFAULT_TEXT[BOTTOM_TAG])
     }
     
+    
+    
     // MARK: Saving an Image
+    
+    
     
     @IBAction func saveImage(_ sender: Any) {
         let activityController = UIActivityViewController(activityItems: [generateMemedImage()], applicationActivities: nil)
         activityController.completionWithItemsHandler = { activity, success, items, error in
-            self.saveMeme()
-            self.confirmMemeSaved()
+            // this only saves the meme if the activity is completed (not if the user cancels)
+            if success {
+                self.saveMeme()
+                self.confirmMemeSaved()
+            }
         }
         self.present(activityController, animated: true, completion: nil)
     }

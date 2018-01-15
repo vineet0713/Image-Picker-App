@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		65C4D33C200D19DB002E5C0E /* Meme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C4D33B200D19DB002E5C0E /* Meme.swift */; };
 		65D51BF820082785000D81DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D51BF720082785000D81DB /* AppDelegate.swift */; };
-		65D51BFA20082785000D81DB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D51BF920082785000D81DB /* ViewController.swift */; };
+		65D51BFA20082785000D81DB /* MemeEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D51BF920082785000D81DB /* MemeEditorViewController.swift */; };
 		65D51BFD20082785000D81DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65D51BFB20082785000D81DB /* Main.storyboard */; };
 		65D51BFF20082785000D81DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65D51BFE20082785000D81DB /* Assets.xcassets */; };
 		65D51C0220082785000D81DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65D51C0020082785000D81DB /* LaunchScreen.storyboard */; };
@@ -34,9 +35,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		65C4D33B200D19DB002E5C0E /* Meme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meme.swift; sourceTree = "<group>"; };
 		65D51BF420082784000D81DB /* Image Picker Experiment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Image Picker Experiment.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		65D51BF720082785000D81DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		65D51BF920082785000D81DB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		65D51BF920082785000D81DB /* MemeEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeEditorViewController.swift; sourceTree = "<group>"; };
 		65D51BFC20082785000D81DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		65D51BFE20082785000D81DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		65D51C0120082785000D81DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -98,7 +100,8 @@
 			isa = PBXGroup;
 			children = (
 				65D51BF720082785000D81DB /* AppDelegate.swift */,
-				65D51BF920082785000D81DB /* ViewController.swift */,
+				65D51BF920082785000D81DB /* MemeEditorViewController.swift */,
+				65C4D33B200D19DB002E5C0E /* Meme.swift */,
 				65D51BFB20082785000D81DB /* Main.storyboard */,
 				65D51BFE20082785000D81DB /* Assets.xcassets */,
 				65D51C0020082785000D81DB /* LaunchScreen.storyboard */,
@@ -259,7 +262,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65D51BFA20082785000D81DB /* ViewController.swift in Sources */,
+				65C4D33C200D19DB002E5C0E /* Meme.swift in Sources */,
+				65D51BFA20082785000D81DB /* MemeEditorViewController.swift in Sources */,
 				65D51BF820082785000D81DB /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
