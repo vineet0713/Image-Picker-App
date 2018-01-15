@@ -8,6 +8,12 @@
 
 import UIKit
 
+
+
+// MARK: Initialize all constants
+
+
+
 let TOP_TAG = 0
 let BOTTOM_TAG = 1
 let DEFAULT_TEXT = ["[TOP TEXT]", "[BOTTOM TEXT]"]
@@ -18,8 +24,7 @@ let MEME_TEXT_ATTRIBUTES: [String : Any] = [
     NSAttributedStringKey.strokeWidth.rawValue : -4.0
 ]
 
-// To be a delegate of the UIImagePickerController, this also needs to conform to the UINavigationControllerDelegate protocol
-class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class MemeEditorViewController: UIViewController {
     
     
     
@@ -158,47 +163,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         self.present(pickerController, animated: true, completion: nil)
     }
     
-    // part of the UIImagePickerController Delegate:
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let userImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            imagePickerView.image = userImage
-        }
-        self.dismiss(animated: true, completion: nil)
-    }
+    // (see ImagePickerExtensions.swift file for UIImagePickerControllerDelegate functions)
     
-    // part of the UIImagePickerController Delegate:
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        // sets the bottomEditing variable to true if the user begins editing the bottom TextField
-        bottomEditing = (textField.tag == 1)
-        if (textField.tag == TOP_TAG && textField.text == DEFAULT_TEXT[TOP_TAG]) || (textField.tag == BOTTOM_TAG && textField.text == DEFAULT_TEXT[BOTTOM_TAG]) {
-            textField.text = ""
-        }
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        finishEditing(with: textField)
-        return true
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        finishEditing(with: textField)
-    }
-    
-    func finishEditing(with textField: UITextField) {
-        // if the user left the TextField empty, then add the default text to it
-        if textField.text == "" {
-            textField.text = DEFAULT_TEXT[textField.tag]
-        } else {
-            textField.text = textField.text?.trimmingCharacters(in: .whitespaces)
-        }
-        // if user has selected an image and both meme fields are filled, then enable the "Share" Button
-        shareButton.isEnabled = (imagePickerView.image != nil && topMemeField.text != DEFAULT_TEXT[TOP_TAG] && bottomMemeField.text != DEFAULT_TEXT[BOTTOM_TAG])
-    }
+    // (see TextFieldExtensions.swift file for UITextFieldDelegate functions)
     
     
     

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		65C4D33C200D19DB002E5C0E /* Meme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C4D33B200D19DB002E5C0E /* Meme.swift */; };
+		65CBC5AD200D5E84008D6E9D /* ImagePickerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CBC5AC200D5E84008D6E9D /* ImagePickerExtensions.swift */; };
+		65CBC5B0200D6106008D6E9D /* TextFieldExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CBC5AF200D6106008D6E9D /* TextFieldExtensions.swift */; };
 		65D51BF820082785000D81DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D51BF720082785000D81DB /* AppDelegate.swift */; };
 		65D51BFA20082785000D81DB /* MemeEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D51BF920082785000D81DB /* MemeEditorViewController.swift */; };
 		65D51BFD20082785000D81DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65D51BFB20082785000D81DB /* Main.storyboard */; };
@@ -36,6 +38,8 @@
 
 /* Begin PBXFileReference section */
 		65C4D33B200D19DB002E5C0E /* Meme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meme.swift; sourceTree = "<group>"; };
+		65CBC5AC200D5E84008D6E9D /* ImagePickerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerExtensions.swift; sourceTree = "<group>"; };
+		65CBC5AF200D6106008D6E9D /* TextFieldExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldExtensions.swift; sourceTree = "<group>"; };
 		65D51BF420082784000D81DB /* Image Picker Experiment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Image Picker Experiment.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		65D51BF720082785000D81DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		65D51BF920082785000D81DB /* MemeEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeEditorViewController.swift; sourceTree = "<group>"; };
@@ -76,6 +80,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		65CBC5AE200D5F19008D6E9D /* MemeEditorVC Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				65CBC5AC200D5E84008D6E9D /* ImagePickerExtensions.swift */,
+				65CBC5AF200D6106008D6E9D /* TextFieldExtensions.swift */,
+			);
+			path = "MemeEditorVC Extensions";
+			sourceTree = "<group>";
+		};
 		65D51BEB20082784000D81DB = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +114,7 @@
 			children = (
 				65D51BF720082785000D81DB /* AppDelegate.swift */,
 				65D51BF920082785000D81DB /* MemeEditorViewController.swift */,
+				65CBC5AE200D5F19008D6E9D /* MemeEditorVC Extensions */,
 				65C4D33B200D19DB002E5C0E /* Meme.swift */,
 				65D51BFB20082785000D81DB /* Main.storyboard */,
 				65D51BFE20082785000D81DB /* Assets.xcassets */,
@@ -263,8 +277,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				65C4D33C200D19DB002E5C0E /* Meme.swift in Sources */,
+				65CBC5AD200D5E84008D6E9D /* ImagePickerExtensions.swift in Sources */,
 				65D51BFA20082785000D81DB /* MemeEditorViewController.swift in Sources */,
 				65D51BF820082785000D81DB /* AppDelegate.swift in Sources */,
+				65CBC5B0200D6106008D6E9D /* TextFieldExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
